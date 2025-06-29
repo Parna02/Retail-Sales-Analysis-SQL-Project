@@ -49,7 +49,7 @@ This project is designed to demonstrate SQL skills and techniques typically used
 
 '''sql
 
-      SELECT COUNT(*) FROM retail_sales;
+    SELECT COUNT(*) FROM retail_sales;
     SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
     SELECT DISTINCT category FROM retail_sales;
     
@@ -84,7 +84,7 @@ The following SQL queries were developed to answer specific business questions:
 
   '''sql
 
-        SELECT 
+      SELECT 
         *
       FROM retail_sales
       WHERE 
@@ -99,29 +99,29 @@ The following SQL queries were developed to answer specific business questions:
 
   '''sql
 
-        SELECT 
+          SELECT 
           category,
           SUM(total_sale) as net_sale,
           COUNT(*) as total_orders
-      FROM retail_sales
-      GROUP BY 1;
+          FROM retail_sales
+          GROUP BY 1;
 '''
   
 - **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.:**
 
   '''sql
 
-        SELECT
+          SELECT
           ROUND(AVG(age), 2) as avg_age
-      FROM retail_sales
-      WHERE category = 'Beauty';
+          FROM retail_sales
+          WHERE category = 'Beauty';
 '''
 
 - **Write a SQL query to find all transactions where the total_sale is greater than 1000.:**
 
   '''sql
 
-        SELECT * FROM retail_sales
+      SELECT * FROM retail_sales
       WHERE total_sale > 1000;
 '''
 
@@ -129,37 +129,37 @@ The following SQL queries were developed to answer specific business questions:
 
   '''sql
 
-        SELECT 
+          SELECT 
           category,
           gender,
           COUNT(*) as total_trans
-      FROM retail_sales
-      GROUP 
+          FROM retail_sales
+          GROUP 
           BY 
           category,
           gender
-      ORDER BY 1;
+          ORDER BY 1;
 '''
 
 - **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year:**
 
   '''sql
 
-        SELECT 
+          SELECT 
              year,
              month,
           avg_sale
-      FROM 
-      (    
-      SELECT 
+          FROM 
+          (    
+          SELECT 
           EXTRACT(YEAR FROM sale_date) as year,
           EXTRACT(MONTH FROM sale_date) as month,
           AVG(total_sale) as avg_sale,
           RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) as rank
-      FROM retail_sales
-      GROUP BY 1, 2
-      ) as t1
-      WHERE rank = 1;
+          FROM retail_sales
+          GROUP BY 1, 2
+          ) as t1
+          WHERE rank = 1;
 
 '''
 
@@ -167,7 +167,7 @@ The following SQL queries were developed to answer specific business questions:
 
   '''sql
 
-        SELECT 
+      SELECT 
           customer_id,
           SUM(total_sale) as total_sales
       FROM retail_sales
@@ -181,7 +181,7 @@ The following SQL queries were developed to answer specific business questions:
 
   '''sql
 
-        SELECT 
+      SELECT 
           category,    
           COUNT(DISTINCT customer_id) as cnt_unique_cs
       FROM retail_sales
@@ -193,7 +193,7 @@ The following SQL queries were developed to answer specific business questions:
 
   '''sql
 
-          WITH hourly_sale
+      WITH hourly_sale
         AS
         (
         SELECT *,
